@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+你好啊朋友
 </body>
 </html>
