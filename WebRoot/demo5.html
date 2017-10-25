@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var add = window.location.href;
+	alert(add);
+	var start = add.lastIndexOf('/');
+	alert(start);
+	var name = add.substring(start+1,add.length);
+	alert(name);
+</script>
+</body>
+</html>

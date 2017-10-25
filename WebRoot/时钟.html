@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="txt"></div>
+</body>
+<script type="text/javascript">
+time();
+function time(){
+	setTimeout(function(){
+		var a = new Date();
+		var txt = document.getElementById("txt");
+		var s = a.getFullYear() +"-"+ (a.getMonth()+1) +"-"+ a.getDate()+" "+
+		addZero(a.getHours())+":"+addZero(a.getMinutes())+":"+addZero(a.getSeconds());
+		txt.innerHTML = s;
+		time();
+	},1000);
+}
+
+
+function addZero(m){
+	if(m<10)
+		return "0" + m;
+	else
+		return m;
+}
+
+</script>
+</html>

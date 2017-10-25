@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	var now = new Date();
+	document.write(now+"<br>");
+	var year = now.getFullYear();
+	var month = now.getMonth();
+	var date = now.getDate();
+	var week = now.getDay();
+	var weeks = ['日','一','二','三','四','五','六'];
+	document.write(year+"-"+(month+1)+"-"+date+",星期"+weeks[week]);
+	now.setDate(32);
+	document.write("<br>"+now);
+	//使用date类型，计算距今12个月后的日期，并输出到页面
+	var wo = {};
+	wo.name = "691";
+	wo.show = function(){
+		alert(wo.name);
+	};
+	//自定义对象
+	var son = {
+			name:"691",
+			age:"18"
+	};
+	//alert(son.age);
+	//正则
+	//var phone =prompt("输入电话号","0451-880276502");
+	var reg1 = /\d{4}-\d{8}/;
+	//alert(reg1.test(phone));
+	var ps = prompt("miam","");
+	var reg2 = /[^a-z\d]/i;
+	alert(!reg2.test(ps));
+	
+</script>
+</body>
+</html>

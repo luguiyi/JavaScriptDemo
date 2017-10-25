@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+<script type="text/javascript">
+	function multiple(n){
+		document.body.innerHTML="";
+		for(var i=1;i<=n;i++){
+			document.write(n+"*"+i+"="+n*i+"<br>");
+		}
+	}
+
+	var flag = 0;
+	while(flag==0){
+		var n = prompt("输入一个乘法表的最大值：", 5);
+		//加判断n是否数字
+		if(isNaN(n)){//不是数字
+			alert("输入的不是一个数字");
+		}else if(n!=-1){
+			multiple(n);
+		}else{
+			flag=1;			
+		}
+	}
+	
+	
+</script>
+</body>
+</html>

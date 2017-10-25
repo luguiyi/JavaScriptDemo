@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+<div id="showbox">
+	留言板：（ps：禁用词汇，java，c，JavaScript）
+</div>
+<div id="txtbox">
+	<br>
+	您想说的话：<br><textarea id="txt"></textarea>
+	<br>
+	<input type="button" value="提交" onclick="checkTxt()">
+</div>
+</body>
+<script type="text/javascript">
+	function checkTxt(){
+		//用户的语句
+		var txt = document.getElementById("txt").value;
+		var badWord = ["java","c","javascript"];//要屏蔽词汇
+		for(var i = 0;i < badWord.length; i++){
+			txt = txt.replace(eval("/\\b"+ badWord[i] +"\\b/ig"), getXin(badWord[i].length));					
+		}
+		showDiv = document.createElement("div");
+		showDiv.innerHTML = "<br>"+ txt ;
+		showbox.appendChild(showDiv);
+	}
+		
+	
+	//用来获取屏蔽的*个数
+	function getXin(number){
+		var xin = "";//用来记录*的个数
+		for(var i = 0;i < number; i++){
+			xin = xin + "*";
+		}
+		return xin;
+	}
+	
+</script>
+</html>

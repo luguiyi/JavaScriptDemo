@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+<div id="txt">00:00:00</div>
+<input type="button" value="开始计时" onclick="startT()">
+<input type="button" value="停止计时" onclick="endT()">
+<input type="button" value="清除" onclick="clearT()">
+<script>
+   sum= 0;
+   var timerId;
+	function startT(){
+		var d = new Date();
+		d.setHours("0");
+		d.setMinutes("0");
+		d.setSeconds(0);
+		
+		
+	
+		timerId=setTimeout(
+				function(){
+					//alert(sum);
+					
+			sum++;
+			d.setSeconds(sum);
+			tt=document.getElementById("txt");
+			h = d.getHours();
+			m = d.getMinutes();
+			s = d.getSeconds();
+			tt.innerHTML=addZero(h)+":"+addZero(m)
+			+":"+addZero(s);	
+			startT();
+			//alert(sum);
+		},1000);
+		
+	}
+	function addZero(m){
+		if(m<10)
+			return "0"+m;
+		else
+			return m;
+	}
+	function endT(){
+		clearTimeout(timerId);
+	}
+	function clearT(){
+		sum=0;
+		clearTimeout(timerId);
+		tt = document.getElementById("txt");
+		tt.innerHTML="00:00:00";
+	}
+</script>
+</body>
+</html>

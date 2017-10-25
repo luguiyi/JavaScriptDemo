@@ -1,0 +1,191 @@
+<HTML>
+<HEAD>
+<TITLE>推箱子</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+
+<STYLE type=text/css>
+.map0 {
+	BACKGROUND-COLOR: #333333;BACKGROUND:url(img/grass.JPG) 100PX 100PX;background-size:100%100%;HEIGHT: 100px; POSITION: absolute; WIDTH: 100px
+}
+.map1 {
+	BACKGROUND-COLOR: #999999;HEIGHT: 100px; POSITION: absolute; WIDTH: 100px
+}
+.map2 {
+	BACKGROUND-COLOR: #333333;BACKGROUND:url(img/grass.JPG) 100PX 100PX;background-size:100%100%;HEIGHT: 100px; POSITION: absolute; WIDTH: 100px;
+}
+.map3 {
+	BACKGROUND-COLOR: #333333;HEIGHT: 100px; POSITION: absolute; WIDTH: 100px;
+}
+
+</STYLE>
+</HEAD>
+
+<BODY>
+<DIV id=gameArea></DIV>
+<div style="position:absolute;z-index:0;width:500px;height:500px;padding:0px;left:600px;top:50px">
+	<form>
+		<select name="cars" id="sele" onchange="switchPeople()">
+			<option selected="selected">熊猫</option>
+			<option>船长</option>
+			<option>风行者</option>
+		</select>
+		<!-- 
+			<input type="button" value="更换人物mod" name= "123" onclick="switchPeople()"/>
+		 -->
+	</form>
+	w,a,s,d进行上下左右移动，F2键向右扩展地图,Esc键向下扩展地图
+</div>
+</BODY>
+<script type="text/javascript">
+	var mapData =[
+	                [1,1,1,1,1,1],
+	                [1,0,0,0,0,1],
+	                [1,0,2,0,0,1],
+	                [1,0,0,0,0,1],
+	                [1,1,1,1,1,1]
+                 ]
+var peopleMod = "panda";//全局变量，记录人物的mod
+	
+function CreateMap(){ //用dom来创建地图。
+	for (var i=0;i<mapData.length;i++){
+		for (var j=0;j<mapData[i].length;j++){
+			var oe=document.createElement("div");
+			    oe.id="box"+i+"_"+j; 
+			    oe.className="map"+mapData[i][j];
+			    oe.style.top= i*100;
+			    oe.style.left= j*100;
+			    if(oe.className=="map2") {
+			    	//alert(flag);
+			    	if(peopleMod=="panda"){
+				    	oe.innerHTML = oe.innerHTML + "<img src='img/panda.png' alt='Big Boat' width='100px' height='100px'>";
+			    	}
+			    	else if(peopleMod=="captain"){
+			    		oe.innerHTML = oe.innerHTML + "<img src='img/captain.png' alt='Big Boat' width='100px' height='100px'>";
+			    	}else if(peopleMod=="Windrunner"){
+			    		oe.innerHTML = oe.innerHTML + "<img src='img/Windrunner.png' alt='Big Boat' width='100px' height='100px'>";
+			    	}
+			    }
+			    if(oe.className=="map3") {
+			    	oe.innerHTML = oe.innerHTML + "<img src='img/captain.png' alt='Big Boat' width='100px' height='100px'>";
+			    }
+			    
+			    
+			    gameArea.appendChild(oe);
+		}
+	}
+}
+
+function move(){
+	//alert("fad");
+	
+	CreateMap();
+	//location.reload()
+	document.onkeydown=function(event) {
+		var e = event || window.event || arguments.callee.caller.arguments[0];
+		for(var i=0;i<mapData.length;i++){//找到指定人物的方法
+			for(var j=0;j<mapData[i].length;j++) {
+				if(mapData[i][j]==2) {
+					x = i;
+					y = j;
+				}
+			}
+		}
+		switch(e.keyCode){
+		case 87:
+			if(mapData[x-1][y]==1) {
+				
+			}else{
+				var t = mapData[x][y];
+				mapData[x][y] = mapData[x-1][y];
+				mapData[x-1][y] = t;				
+				}
+				break; //w 87 按 Esc 27 按 F2 113 enter 键 13	
+		case 65:
+			if(mapData[x][y-1]==1) {
+						
+			}else{
+				var t = mapData[x][y];
+				mapData[x][y] = mapData[x][y-1];
+				mapData[x][y-1] = t;
+			}
+			break; //a 65
+		case 83:
+			if(mapData[x+1][y]==1) {
+						
+			}else{
+				var t = mapData[x][y];
+				mapData[x][y] = mapData[x+1][y];
+				mapData[x+1][y] = t;
+			}
+			break; //s 83
+		case 68:
+			if(mapData[x][y+1]==1) {
+						
+			}else{
+				var t = mapData[x][y];
+				mapData[x][y] = mapData[x][y+1];
+				mapData[x][y+1] = t;
+				}
+			break; //d 68
+		case 113:
+			//alert("F2");
+			for(var i=0;i<mapData.length;i++) {
+				mapData[i][mapData[i].length-1] = 0;
+				if(i==0){
+					mapData[i][mapData[i].length-1] = 1;											
+				}
+				if(i==mapData.length-1){
+					mapData[i][mapData[i].length-1] = 1;
+				}
+				mapData[i][mapData[i].length] = 1;			
+			}
+			;break;
+		case 27:
+			var addDownMapData = [];
+			//alert(mapData.toString());
+			for(var i=0;i<mapData.length;i++) {
+				for(var j=0;j<mapData[i].length;j++) {
+					mapData[mapData.length-1][j] = 0;
+					mapData[mapData.length-1][0] = 1;
+					mapData[mapData.length-1][mapData[i].length-1] = 1;
+					addDownMapData[j] = 1;
+				}
+			}
+			//alert(addDownMapData.toString());
+			mapData[mapData.length] =  addDownMapData;
+			
+			//alert(mapData.toString());
+			;break;
+		}
+		
+		CreateMap();
+			
+		
+	}
+	
+	//var t=setTimeout("move()",1000);
+	//clearTimeout(t);
+	
+}
+
+	move();
+	function switchPeople(){
+		var selectIndex = document.getElementById("sele").selectedIndex;//获得是第几个被选中了
+		var selectText = document.getElementById("sele").options[selectIndex].text;//获得被选中的项目的文本
+		if(selectText == "船长"){
+			peopleMod = "captain";
+			CreateMap();
+		}
+		if(selectText == "熊猫"){
+			peopleMod = "panda";
+			CreateMap();
+		}
+		if(selectText == "风行者"){
+			peopleMod = "Windrunner";
+			CreateMap();
+		}
+		//location.reload();
+	}
+
+</script>
+</HTML>

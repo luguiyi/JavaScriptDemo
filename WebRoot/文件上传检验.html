@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form>
+		文件：<input type="file" id ="file">
+		<input type="submit" value="提交" onclick="return fileJudge()">
+	</form>
+	<div id="picture" style="top: 300px;right: 300px;"><img src="E:/666.jpg" width="100px" height="100px"></div>
+</body>
+<script type="text/javascript">
+	function fileJudge(){
+		file = document.getElementById("file");
+		picture = document.getElementById("picture");
+		alert(file);
+		fileName = file.value;
+		imgsrc = fileName.replace(/\\/g, "\/");
+		alert(imgsrc.toString());
+		var name = fileName.substring(fileName.lastIndexOf(".")+1);
+		var fileTypes = ["jpg","png","jpeg"];
+		if(fileTypes.indexOf(name)==-1){
+			alert("文件格式不符，请重新输入！");
+			return false;
+		}else{
+			picture.innerHTML="<img src='imgsrc' width='100px' height='100px'>";
+			alert(fileName);
+			return false;
+		}
+		//alert(name);
+	}
+	
+</script>
+</html>

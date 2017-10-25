@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+function visible(cursor,i){//设置鼠标移入及移出时的图片效果
+	if(i==0)
+		cursor.filters.alpha.opacity=1000;
+	else
+		cursor.filters.alpha.opacity=30;
+}
+
+</script>
+<body>
+<table border="0" cellpadding="0" cellpacing="0">
+	<tr>
+		<td align="center" bgcolor="#CCCCCC">
+	<img src="img/panda.png" border="0" style="filter:alpha(opcity=100)" onMouseOver="visible(this,1)" onMouseOut="visible(this,0)" width="148" height="121">
+	</td>
+	</tr>
+</table>
+</body>
+</html>

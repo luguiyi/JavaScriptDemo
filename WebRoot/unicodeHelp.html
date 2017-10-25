@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id = "show">
+		
+	</div>
+	<div id = "write">
+		<textarea id="txt" rows="10" cols="20">
+		</textarea>
+		<input type="button" value="交换文本" onclick="changeText()">
+		<textarea id="flagtxt" rows="10" cols="20">
+		</textarea>
+		<br>
+		<select id="trans1">
+		</select>
+		<input type="button" value="转" onclick="change()">
+		<select id="trans2">
+		</select>
+		<br>
+		<input type="button" value="转换" onclick="translate()">
+	</div>
+</body>
+<script type="text/javascript">
+	transWay();
+
+	//交换选项中的文本
+	function change(){
+		var tr1op1 = document.getElementById("tr1op1");
+		var tr2op2 = document.getElementById("tr2op2");
+		var t = tr1op1.value;
+		tr1op1.value = tr2op2.value;
+		tr2op2.value = t;
+		
+		var w = tr1op1.text;
+		tr1op1.text = tr2op2.text;
+		tr2op2.text = w;
+		//changeText();
+		
+	}
+
+	//交换文本里的内容
+	function changeText(){
+		var txt = document.getElementById("txt");
+		var flagtxt = document.getElementById("flagtxt");
+		var t = txt.value;
+		txt.value = flagtxt.value;
+		flagtxt.value = t;
+	}
+	
+	//flag=0的时候Unicode转汉字		1的时候汉字转Unicode
+	function translate(){
+		var flag = document.getElementById("trans1").value;
+		//alert(flag);
+		var txt = document.getElementById("txt").value;
+		var sourceWord = [];
+		var transWord = [];
+		sourceWord = txt.split(" ");
+		for(var i = 0;i < sourceWord.length; i++){
+			if(flag ==0){
+				transWord[i] = reconvert(sourceWord[i]);
+			}else if(flag ==1){
+				transWord[i] = unicode(sourceWord[i]);
+			}
+		}
+		addWord(transWord);
+		var flagtxt = document.getElementById("flagtxt");
+		flagtxt.value = transWord ;
+	}
+	
+	function transWay(){
+		var trans1 = document.getElementById("trans1");
+		var option1 = document.createElement("option");
+		var optxt1 = document.createTextNode("Unicode");
+		
+		
+		option1.setAttribute("value", "0");
+		option1.setAttribute("id", "tr1op1");
+		option1.appendChild(optxt1);
+		trans1.appendChild(option1);
+		
+		var trans2 = document.getElementById("trans2");
+		var option2 = document.createElement("option");
+		var optxt2 = document.createTextNode("汉字");
+		
+		
+		option2.setAttribute("value", "1");
+		option2.setAttribute("id", "tr2op2");
+		option2.appendChild(optxt2);
+		trans2.appendChild(option2);
+	}
+	
+	//添加文字到页面
+	function addWord(txt){
+		showDiv = document.createElement("div");
+		showDiv.innerHTML = txt + "<br>";
+		show.appendChild(showDiv);
+	}
+	
+	//Unicode转汉字
+	function reconvert(str){ 
+        str = str.replace(/(\\u)(\w{1,4})/gi,function($0){ 
+            return (String.fromCharCode(parseInt((escape($0).replace(/(%5Cu)(\w{1,4})/g,"$2")),16))); 
+        }); 
+        str = str.replace(/(&#x)(\w{1,4});/gi,function($0){ 
+            return String.fromCharCode(parseInt(escape($0).replace(/(%26%23x)(\w{1,4})(%3B)/g,"$2"),16)); 
+        }); 
+        str = str.replace(/(&#)(\d{1,6});/gi,function($0){ 
+            return String.fromCharCode(parseInt(escape($0).replace(/(%26%23)(\d{1,6})(%3B)/g,"$2"))); 
+        }); 
+         
+        return str; 
+    }
+	
+	//汉字转Unicode
+	function unicode(str){
+            var value='';
+            for (var i = 0; i < str.length; i++) {
+                value += '\\u' + left_zero_4(parseInt(str.charCodeAt(i)).toString(16));
+            }
+            return value;
+        }
+        function left_zero_4(str) {
+            if (str != null && str != '' && str != 'undefined') {
+                if (str.length == 2) {
+                    return '00' + str;
+                }
+            }
+            return str;
+        }
+
+</script>
+</html>

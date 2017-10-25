@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+var stu={ "firstName": "Brett", "lastName":"McLaughlin", "email": "aaaa" }
+$.each(stu,function(key,value){
+    alert(key+"---"+value);
+})
+
+
+var people = 
+  {
+      "演员": 
+      [ 
+          { "firstName": "Brett", "lastName":"要被取值的", "email": "aaaa" },
+            { "firstName": "Jason", "lastName":"Hunter", "email": "bbbb" },
+            { "firstName": "Elliotte", "lastName":"Harold", "email": "cccc" }
+        ],
+        
+        "作者": [
+        { "firstName": "Isaac", "lastName": "Asimov", "genre": "science fiction" },
+        { "firstName": "Tad", "lastName": "Williams", "genre": "fantasy" },
+        { "firstName": "Frank", "lastName": "Peretti", "genre": "christian fiction" }
+        ],
+        
+        "配乐": [
+        { "firstName": "Eric", "lastName": "Clapton", "instrument": "guitar" },
+        { "firstName": "Sergei", "lastName": "Rachmaninoff", "instrument": "piano" }
+        ] 
+    
+    }
+    
+    //这里有3 个key,每个key对应的value 又是一个数组,数组中的每个元素,又是一个对象(对象由键值对组成)
+    //alert(people.演员[0].lastName) ; 可以取出 "要被取值的" 这个数组
+</script>
+</html>

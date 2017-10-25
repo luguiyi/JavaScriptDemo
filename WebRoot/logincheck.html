@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form>
+	Username：<input type="text" id="username"><br>
+	email：<input type="text" id="email"><br>
+	password：<input type="text" id="password"><br>
+	verify password：<input type="text" id="vpassword"><br>
+	<input type="button" value="提交" onclick="check()" id="but">
+</form>
+</body>
+<script type="text/javascript">
+function check(){
+	var uname = $("#username").val();
+	var email = $("#email").val();
+	var password = $("#password").val();
+	var vpassword = $("#vpassword").val();
+	var namer = /^[a-zA-Z0-9_]{6,10}$/;
+	var pwr = /^.{8,10}$/ ;
+	
+	if(uname==""){
+		alert("用户名不能为空");
+		return;
+	}
+	if(!namer.test(uname)){
+		alert("用户名不符合格式");	
+		return;
+	}
+	if(!pwr.test(password)){
+		alert("密码长度不符合格式");
+		return;
+	}
+	
+	if(email==""){
+		alert("邮箱不能为空");
+		return;
+	}
+	if(password==""){
+		alert("密码不能为空");
+		return;
+	}
+	if(vpassword!=password){
+		alert("两次密码不一致");
+		return;
+	}
+	
+}
+
+</script>
+</html>
